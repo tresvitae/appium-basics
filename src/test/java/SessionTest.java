@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
+import java.util.List;
 
 public class SessionTest {
 
@@ -40,6 +41,7 @@ public class SessionTest {
 
     @Test
     public void test() {
-        WebElement element = driver.findElement(MobileBy.AccessibilityId("Login Screen"));
+        List<WebElement> elements = driver.findElements(MobileBy.AccessibilityId("Login Screen"));
+        System.out.println(elements.size());
     }
 }
