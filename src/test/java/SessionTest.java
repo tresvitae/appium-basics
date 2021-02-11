@@ -1,7 +1,9 @@
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
@@ -17,22 +19,27 @@ public class SessionTest {
     public void setUp() throws Exception {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("platformName", "Android");
-        caps.setCapability("platformVersion","9");
-        caps.setCapability("deviceName","Android Emulator");
+        caps.setCapability("platformVersion", "9");
+        caps.setCapability("deviceName", "Android Emulator");
         caps.setCapability("app", APP);
 
         driver = new AndroidDriver(new URL(APPIUM), caps);
+
+        try {
+            Thread.sleep(3000);
+        } catch (Exception foo) {
+        }
     }
 
     @After
-    public void tearDown(){
-        if(driver != null){
+    public void tearDown() {
+        if (driver != null) {
             driver.quit();
         }
     }
 
     @Test
     public void test() {
-        System.out.println("HELLO BASICs");
+        WebElement element = driver.findElement(MobileBy.AccessibilityId("Login Screen"));
     }
 }
