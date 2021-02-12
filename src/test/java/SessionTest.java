@@ -14,6 +14,7 @@ public class SessionTest {
     private static final String APP = "https://github.com/cloudgrey-io/the-app/releases/download/v1.9.0/TheApp-v1.9.0.apk";
     private static final String APPIUM = "http://localhost:4723/wd/hub";
 
+    // start up the app using appium
     private AndroidDriver driver;
 
     @Before
@@ -26,6 +27,8 @@ public class SessionTest {
 
         driver = new AndroidDriver(new URL(APPIUM), caps);
 
+        //STATIC WAITS
+        // wait for 3 sec to make sure the app is fully loaded
         try {
             Thread.sleep(3000);
         } catch (Exception foo) {
@@ -41,6 +44,7 @@ public class SessionTest {
 
     @Test
     public void test() {
+        // finding 'Login Scree' element
         List<WebElement> elements = driver.findElements(MobileBy.AccessibilityId("Login Screen"));
         System.out.println(elements.size());
     }
