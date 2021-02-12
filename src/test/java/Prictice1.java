@@ -41,16 +41,12 @@ public class Prictice1 {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         String MESSAGE = "Hello World";
 
-        WebElement mainActivity = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Echo Box")));
-        mainActivity.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Echo Box"))).click();
 
-        WebElement echoBoxActivity = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("messageInput")));
-        echoBoxActivity.sendKeys(MESSAGE);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("messageInput"))).sendKeys(MESSAGE);
 
-        WebElement saveButton = driver.findElement(MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"messageSaveBtn\"]/android.widget.TextView"));
-        saveButton.click();
+        driver.findElement(MobileBy.xpath("//android.view.ViewGroup[@content-desc=\"messageSaveBtn\"]/android.widget.TextView")).click();
 
-        //By.xpath("//android.widget.TextView[contains(@text, '" + MESSAGE + "']")
         WebElement popUpMessage = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(MESSAGE)));
         assert(popUpMessage.getText().contains(MESSAGE));
     }
