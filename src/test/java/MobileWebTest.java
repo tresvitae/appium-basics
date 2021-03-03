@@ -1,8 +1,13 @@
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,16 +20,15 @@ public class MobileWebTest {
     private static final String APPIUM = "http://localhost:4723/wd/hub";
 
     // Class for exploring website
-    private RemoteWebDriver driver;
+    private WebDriver driver;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUpAndroid() throws Exception {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9.0");
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "Appium");
-        // Set Browser name for testing
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11");
+        // CHROMEDRIVER NEED TO BE SETUP DURING OPEN
+        // appium --chromedriver-executable /usr/local/bin/chromedriver
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
         // start up the app using appium
         driver = new RemoteWebDriver(new URL(APPIUM), capabilities);
@@ -42,13 +46,14 @@ public class MobileWebTest {
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
         // Navigate to a URL in browser
-        driver.get("https://www.onet.pl");
+        driver.get("https://www.google.com");
+
         // Web specific locator strategies to click on menu.
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("bubleMenuHambuerger"))).click();
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("bubleMenuHambuerger"))).click();
         // locator strategy for web testing
-        driver.findElement(By.linkText("xxxxxxxxx")).click();
+        //driver.findElement(By.linkText("xxxxxxxxx")).click();
         // Get the title of a webpage.
-        driver.getTitle();
+        //driver.getTitle();
 
     }
 }
