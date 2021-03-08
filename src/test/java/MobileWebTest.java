@@ -4,8 +4,10 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -14,6 +16,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.sql.Time;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class MobileWebTest {
 
@@ -42,18 +48,32 @@ public class MobileWebTest {
     }
 
     @Test
-    public void test() {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+    public void checkTitle() throws InterruptedException{
+        driver.get("https://www.linux.pl");
 
-        // Navigate to a URL in browser
-        driver.get("https://www.google.com");
+        String titlePage = driver.getTitle();
+        Assert.assertEquals("Polska Strona Linuksa - Linux.pl", titlePage);
+    }
 
-        // Web specific locator strategies to click on menu.
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("bubleMenuHambuerger"))).click();
-        // locator strategy for web testing
-        //driver.findElement(By.linkText("xxxxxxxxx")).click();
-        // Get the title of a webpage.
-        //driver.getTitle();
+    @Test
+    public void openContacts() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
 
+        driver.get("https://www.linux.pl");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"page\"]/div/header/div[1]/div[2]/div[1]/span"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"menu-item-3105\"]/a"))).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"menu-item-2015\"]/a"))).click();
+
+        Thread.sleep(3000);
+        String comapnyAddress = driver.findElement(By.xpath("//*[@id=\"primary\"]/div[2]/div/div/div/div[4]/div[2]/p/strong")).getText();
+        Assert.assertEquals("AB-Com Arkadiusz Bednarczyk", comapnyAddress);
+    }
+    @Test
+    public void changeToDarkMode() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+
+        driver.get("https://www.linux.pl");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"page\"]/div/header/div[1]/div[2]/div[3]/span[1]/i[2]"))).click();
     }
 }

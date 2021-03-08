@@ -1,0 +1,12 @@
+stop appium server through command line?
+
+Run ps -A | grep appium
+Note the process ID
+Run kill [process ID]
+
+OR: killall appium-desktop
+
+
+And close the port:
+sudo ss -tulwn | grep LISTEN
+
