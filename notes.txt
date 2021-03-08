@@ -10,3 +10,9 @@ OR: killall appium-desktop
 And close the port:
 sudo ss -tulwn | grep LISTEN
 
+
+
+If EADDRINUSE, Address already in use is the issue:
+ps aux | grep node   to get the process ids.
+kill -9 PID
+Doing the -9 on kill sends a SIGKILL
