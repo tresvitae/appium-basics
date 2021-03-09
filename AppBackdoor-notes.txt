@@ -1,0 +1,17 @@
+Internal App Code (for Test proposes):
+
+public void raiseToast (String message){
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+}
+
+JSON data used for this method:
+{
+    "target": "application",
+    "methods": [{
+        "name": "raiseToast",
+        "args":  [{
+            "value": "Hello from the test scrip!",
+            "type": "String"
+        }]
+    }]
+}
